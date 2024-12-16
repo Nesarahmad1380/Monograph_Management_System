@@ -1,49 +1,43 @@
 import 'package:flutter/material.dart';
 
-class MonographDetails extends StatefulWidget {
-  const MonographDetails({Key? key}) : super(key: key);
+class MonographDetailsPage extends StatelessWidget {
+  final String
+      monograph; // Placeholder for monograph details. Replace with actual data model.
 
-  @override
-  _MonographDetailsState createState() => _MonographDetailsState();
-}
+  MonographDetailsPage({required this.monograph});
 
-class _MonographDetailsState extends State<MonographDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Mongraph Details'),
+        title: Text('Monograph Details'),
       ),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            Text('Monograph title:'),
-            SizedBox(
-              height: 2,
-            ),
-            Text('Provided by :'),
-            SizedBox(
-              height: 2,
-            ),
-            Text('Instructor :'),
-            SizedBox(
-              height: 2,
-            ),
-            Text('Data :'),
-            SizedBox(
-              height: 2,
-            ),
-            Text('Monograph information :'),
-            SizedBox(
-              height: 2,
-            ),
-            Text('Department : '),
-            SizedBox(
-              height: 2,
-            ),
-            Text('Faculty : ')
+            _buildDetailRow('Monograph Title:', monograph),
+            _buildDetailRow('Provider:', 'Provider Info'),
+            _buildDetailRow('Instructor:', 'Instructor Info'),
+            _buildDetailRow('Date:', 'Date Info'),
+            _buildDetailRow(
+                'Monograph Information:', 'Detailed Monograph Info'),
+            _buildDetailRow('Department:', 'Department Info'),
+            _buildDetailRow('Faculty:', 'Faculty Info'),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildDetailRow(String title, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        children: [
+          Text('$title ', style: TextStyle(fontWeight: FontWeight.bold)),
+          Expanded(child: Text(value)),
+        ],
       ),
     );
   }

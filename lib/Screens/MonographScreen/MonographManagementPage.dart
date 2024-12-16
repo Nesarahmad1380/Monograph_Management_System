@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
-import 'AddMonographPage.dart';
+// Import Monograph Details page
+import 'package:monograph_management_system/Screens/MonographScreen/AddMonographPage.dart';
+import 'package:monograph_management_system/Screens/MonographScreen/MonographDetails.dart';
 
 class MonographManagementPage extends StatefulWidget {
   const MonographManagementPage({Key? key}) : super(key: key);
@@ -11,112 +12,64 @@ class MonographManagementPage extends StatefulWidget {
 }
 
 class _MonographManagementPageState extends State<MonographManagementPage> {
-  List<Map<String, String>> monographs = [
-    {
-      'title': 'Artificial Intelligence',
-      'provider': 'John Doe',
-      'instructor': 'Dr. Smith',
-      'date': '2024-12-01',
-      'department': 'Computer Science',
-      'info': 'A comprehensive study on AI advancements.',
-      'faculty': 'Engineering'
-    },
-    {
-      'title': 'Blockchain Technology',
-      'provider': 'Jane Doe',
-      'instructor': 'Dr. Brown',
-      'date': '2024-11-15',
-      'department': 'Information Systems',
-      'info': 'Understanding blockchain and its applications.',
-      'faculty': 'Management'
-    },
-  ];
-
-  // Function to handle edit or delete
-  void handleEdit(int index) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => AddMonographPage(
-          monograph: monographs[index],
-          isEditing: true,
-          onSave: (updatedMonograph) {
-            setState(() {
-              monographs[index] = updatedMonograph;
-            });
-          },
-        ),
-      ),
-    );
-  }
-
-  void handleDelete(int index) {
-    setState(() {
-      monographs.removeAt(index);
-    });
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text('Monograph deleted successfully!'),
-    ));
-  }
+  List<String> monographs = []; // This should be a list of your monographs.
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Monograph Management'),
-        backgroundColor: Colors.blueAccent,
       ),
-      body: monographs.isEmpty
-          ? Center(
-              child: Text(
-                'No monographs available. Add a new one!',
-                style: TextStyle(fontSize: 18, color: Colors.grey),
-              ),
-            )
-          : ListView.builder(
-              padding: const EdgeInsets.all(10),
-              itemCount: monographs.length,
-              itemBuilder: (context, index) {
-                final monograph = monographs[index];
-                return Card(
-                  margin: const EdgeInsets.symmetric(vertical: 8),
-                  elevation: 4,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  child: ListTile(
-                    title: Text(
-                      monograph['title']!,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                    ),
-                    subtitle: Text(monograph['department']!),
-                    trailing: PopupMenuButton<String>(
-                      onSelected: (value) {
-                        if (value == 'Edit') handleEdit(index);
-                        if (value == 'Delete') handleDelete(index);
-                      },
-                      itemBuilder: (context) => [
-                        PopupMenuItem(value: 'Edit', child: Text('Edit')),
-                        PopupMenuItem(value: 'Delete', child: Text('Delete')),
-                      ],
-                    ),
-                  ),
-                );
-              },
+      body: ListView.builder(
+        itemCount: monographs.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(monographs[
+                index]), // You should use a more detailed widget here for each monograph.
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.edit),
+                  onPressed: () {
+                    // Navigate to the Add Monograph page to edit the monograph
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AddMonographPage(),
+                      ),
+                    );
+                  },
+                ),
+                IconButton(
+                  icon: Icon(Icons.delete),
+                  onPressed: () {
+                    setState(() {
+                      monographs.removeAt(
+                          index); // Remove the monograph from the list
+                    });
+                  },
+                ),
+              ],
             ),
+            onTap: () {
+              // Navigate to the Monograph Details page
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      MonographDetailsPage(monograph: monographs[index]),
+                ),
+              );
+            },
+          );
+        },
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) => AddMonographPage(
-                onSave: (newMonograph) {
-                  setState(() {
-                    monographs.add(newMonograph);
-                  });
-                },
-              ),
-            ),
+            MaterialPageRoute(builder: (context) => AddMonographPage()),
           );
         },
         child: Icon(Icons.add),
