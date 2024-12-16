@@ -31,32 +31,34 @@ class _splashscreenState extends State<splashscreen>
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: Container(
-          width: double.infinity,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 50.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Image.asset('Images/Heratcomputersciencelogo.PNG'),
-                Text(
-                  'welcome to Mongraph Management System',
-                  style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.black,
-                    fontStyle: FontStyle.italic,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 2,
-                  ),
-                ),
-                Text('v 0.0.1',
+        body: Center(
+          child: Container(
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 50.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset('images/Heratacomputersciencelogo.PNG'),
+                  Text(
+                    'welcome to Mongraph Management System',
                     style: TextStyle(
                       fontSize: 25,
+                      color: Colors.black,
                       fontStyle: FontStyle.italic,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 2,
-                    ))
-              ],
+                    ),
+                  ),
+                  Text('v 0.0.1',
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 2,
+                      ))
+                ],
+              ),
             ),
           ),
         ),
