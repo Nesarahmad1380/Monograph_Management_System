@@ -36,28 +36,39 @@ class _SplashScreenState extends State<SplashScreen>
         child: Container(
           width: double.infinity,
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 50.0),
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('images/Heratacomputersciencelogo.PNG'),
-                const Text(
-                  'Welcome to Monograph Management System',
-                  style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.black,
-                    fontStyle: FontStyle.italic,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 2,
+                ClipOval(
+                  child: Image.asset(
+                    'images/Heratacomputersciencelogo.PNG',
+                    width: 120,
+                    height: 120,
+                    fit: BoxFit.cover,
                   ),
                 ),
-                const Text('v 0.0.1',
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 2,
-                    ))
+                const SizedBox(height: 20),
+                const Text(
+                  'Welcome to\nMonograph Management System',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: Colors.black,
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 1.5,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                const Text(
+                  'v 0.0.1',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
               ],
             ),
           ),
