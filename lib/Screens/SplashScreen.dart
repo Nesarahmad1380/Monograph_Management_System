@@ -38,7 +38,7 @@ class _splashscreenState extends State<splashscreen>
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Image.asset('image/attendanceicon.png'),
+                // Image.asset('Images/Heratcomputersciencelogo.PNG'),
                 Text(
                   'welcome to Mongraph Management System',
                   style: TextStyle(
