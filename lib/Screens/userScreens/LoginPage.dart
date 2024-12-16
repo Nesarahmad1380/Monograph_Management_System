@@ -139,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => RagisterPage()));
+                            builder: (context) => RegisterPage()));
                   },
                   child: Text(
                     'Go to Register Page',
