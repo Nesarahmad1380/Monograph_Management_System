@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
 class AddMonographPage extends StatefulWidget {
-  const AddMonographPage({Key? key}) : super(key: key);
+  final bool isEdit;
+  final Map<String, String>? monograph;
+  final int? index;
+
+  const AddMonographPage(
+      {Key? key, this.isEdit = false, this.monograph, this.index})
+      : super(key: key);
 
   @override
   _AddMonographPageState createState() => _AddMonographPageState();
@@ -16,202 +22,136 @@ class _AddMonographPageState extends State<AddMonographPage> {
   TextEditingController _monographInfoController = TextEditingController();
   TextEditingController _facultyController = TextEditingController();
 
-  // Date Picker function
-  Future<void> _selectDate(BuildContext context) async {
-    DateTime selectedDate = DateTime.now();
-    final DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: selectedDate,
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2101),
-    );
-
-    if (pickedDate != null && pickedDate != selectedDate) {
-      setState(() {
-        _dateController.text = "${pickedDate.toLocal()}".split(' ')[0];
-      });
+  @override
+  void initState() {
+    super.initState();
+    if (widget.isEdit && widget.monograph != null) {
+      _titleController.text = widget.monograph!['title']!;
+      _providerController.text = widget.monograph!['provider']!;
+      _instructorController.text = widget.monograph!['instructor']!;
+      _dateController.text = widget.monograph!['date']!;
+      _departmentController.text = widget.monograph!['department']!;
+      _monographInfoController.text = widget.monograph!['monographInfo'] ?? '';
+      _facultyController.text = widget.monograph!['faculty']!;
     }
+  }
+
+  void _saveMonograph() {
+    final monograph = {
+      'title': _titleController.text,
+      'provider': _providerController.text,
+      'instructor': _instructorController.text,
+      'date': _dateController.text,
+      'department': _departmentController.text,
+      'monographInfo': _monographInfoController.text,
+      'faculty': _facultyController.text,
+    };
+
+    // Return the monograph data back to the previous screen
+    Navigator.pop(context, monograph);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add/Update Monograph'),
+        title: Text(
+          widget.isEdit ? 'Edit Monograph' : 'Add Monograph',
+          style: TextStyle(fontFamily: 'Roboto', fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Colors.blue, // Changed to blue accent
+        elevation: 0,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            // Title Field
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
-              child: TextField(
-                controller: _titleController,
-                decoration: InputDecoration(
-                  labelText: 'Monograph Title',
-                  labelStyle: TextStyle(color: Colors.blueGrey),
-                  hintText: 'Enter the title of the monograph',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide: BorderSide(color: Colors.blueGrey),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide: BorderSide(color: Colors.blue),
-                  ),
-                ),
-              ),
+            _buildTextField(
+              controller: _titleController,
+              label: 'Monograph Title',
+              icon: Icons.book,
             ),
-
-            // Provider Field
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
-              child: TextField(
-                controller: _providerController,
-                decoration: InputDecoration(
-                  labelText: 'Provider',
-                  labelStyle: TextStyle(color: Colors.blueGrey),
-                  hintText: 'Enter the provider of the monograph',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide: BorderSide(color: Colors.blueGrey),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide: BorderSide(color: Colors.blue),
-                  ),
-                ),
-              ),
+            _buildTextField(
+              controller: _providerController,
+              label: 'Provider',
+              icon: Icons.business,
             ),
-
-            // Instructor Field
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
-              child: TextField(
-                controller: _instructorController,
-                decoration: InputDecoration(
-                  labelText: 'Instructor',
-                  labelStyle: TextStyle(color: Colors.blueGrey),
-                  hintText: 'Enter the instructor\'s name',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide: BorderSide(color: Colors.blueGrey),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide: BorderSide(color: Colors.blue),
-                  ),
-                ),
-              ),
+            _buildTextField(
+              controller: _instructorController,
+              label: 'Instructor',
+              icon: Icons.person,
             ),
-
-            // Date Field with Date Picker
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
-              child: TextField(
-                controller: _dateController,
-                readOnly: true,
-                decoration: InputDecoration(
-                  labelText: 'Date',
-                  labelStyle: TextStyle(color: Colors.blueGrey),
-                  hintText: 'Select the date',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide: BorderSide(color: Colors.blueGrey),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide: BorderSide(color: Colors.blue),
-                  ),
-                  suffixIcon: IconButton(
-                    icon: Icon(Icons.calendar_today),
-                    onPressed: () => _selectDate(context),
-                  ),
-                ),
-              ),
+            _buildTextField(
+              controller: _dateController,
+              label: 'Date',
+              icon: Icons.date_range,
             ),
-
-            // Department Field
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
-              child: TextField(
-                controller: _departmentController,
-                decoration: InputDecoration(
-                  labelText: 'Department',
-                  labelStyle: TextStyle(color: Colors.blueGrey),
-                  hintText: 'Enter the department name',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide: BorderSide(color: Colors.blueGrey),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide: BorderSide(color: Colors.blue),
-                  ),
-                ),
-              ),
+            _buildTextField(
+              controller: _departmentController,
+              label: 'Department',
+              icon: Icons.school,
             ),
-
-            // Monograph Information Field
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
-              child: TextField(
-                controller: _monographInfoController,
-                maxLines: 5,
-                decoration: InputDecoration(
-                  labelText: 'Monograph Information',
-                  labelStyle: TextStyle(color: Colors.blueGrey),
-                  hintText: 'Enter detailed information about the monograph',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide: BorderSide(color: Colors.blueGrey),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide: BorderSide(color: Colors.blue),
-                  ),
-                ),
-              ),
+            _buildTextField(
+              controller: _monographInfoController,
+              label: 'Monograph Info',
+              icon: Icons.info_outline,
             ),
-
-            // Faculty Field
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
-              child: TextField(
-                controller: _facultyController,
-                decoration: InputDecoration(
-                  labelText: 'Faculty',
-                  labelStyle: TextStyle(color: Colors.blueGrey),
-                  hintText: 'Enter the faculty name',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide: BorderSide(color: Colors.blueGrey),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide: BorderSide(color: Colors.blue),
-                  ),
-                ),
-              ),
+            _buildTextField(
+              controller: _facultyController,
+              label: 'Faculty',
+              icon: Icons.account_balance,
             ),
-
-            // Save Button
+            SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                // Handle Add/Update logic
-                Navigator.pop(context);
-              },
+              onPressed: _saveMonograph,
               style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(vertical: 12.0),
-                backgroundColor: Colors.blue,
+                backgroundColor: Colors.blue, // Changed to blue accent
+                padding: EdgeInsets.symmetric(vertical: 12),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
-                ), // Button Color
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                textStyle: TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              child: Text('Save Monograph'),
+              child: Text(
+                widget.isEdit ? 'Update Monograph' : 'Save Monograph',
+                style:
+                    TextStyle(color: Colors.white), // Button text is now white
+              ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String label,
+    required IconData icon,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      child: TextField(
+        controller: controller,
+        decoration: InputDecoration(
+          labelText: label,
+          labelStyle: TextStyle(fontFamily: 'Roboto', fontSize: 14),
+          prefixIcon: Icon(icon, color: Colors.blue), // Changed to blue accent
+          filled: true,
+          fillColor: Colors.grey[100],
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15.0),
+            borderSide: BorderSide.none,
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15.0),
+            borderSide: BorderSide(
+                color: Colors.blue, width: 2), // Changed to blue accent
+          ),
         ),
       ),
     );

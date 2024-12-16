@@ -1,43 +1,81 @@
 import 'package:flutter/material.dart';
 
 class MonographDetailsPage extends StatelessWidget {
-  final String
-      monograph; // Placeholder for monograph details. Replace with actual data model.
+  final Map<String, String> monograph;
 
-  MonographDetailsPage({required this.monograph});
+  // Constructor to receive the monograph data
+  const MonographDetailsPage({Key? key, required this.monograph})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Monograph Details'),
+        backgroundColor: Colors.blueAccent,
+        title: Text(
+          'Monograph Details',
+          style: TextStyle(
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        elevation: 0,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            _buildDetailRow('Monograph Title:', monograph),
-            _buildDetailRow('Provider:', 'Provider Info'),
-            _buildDetailRow('Instructor:', 'Instructor Info'),
-            _buildDetailRow('Date:', 'Date Info'),
-            _buildDetailRow(
-                'Monograph Information:', 'Detailed Monograph Info'),
-            _buildDetailRow('Department:', 'Department Info'),
-            _buildDetailRow('Faculty:', 'Faculty Info'),
+            _buildDetailCard('Monograph Title', monograph['title']!),
+            _buildDetailCard('Provider', monograph['provider']!),
+            _buildDetailCard('Instructor', monograph['instructor']!),
+            _buildDetailCard('Date', monograph['date']!),
+            _buildDetailCard('Department', monograph['department']!),
+            _buildDetailCard('Faculty', monograph['faculty']!),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildDetailRow(String title, String value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        children: [
-          Text('$title ', style: TextStyle(fontWeight: FontWeight.bold)),
-          Expanded(child: Text(value)),
-        ],
+  Widget _buildDetailCard(String title, String value) {
+    return Card(
+      margin: EdgeInsets.symmetric(vertical: 8),
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          children: [
+            Icon(Icons.info_outline, color: Colors.blueAccent),
+            SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blueAccent,
+                    ),
+                  ),
+                  SizedBox(height: 4),
+                  Text(
+                    value,
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      color: Colors.black87,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
