@@ -22,7 +22,7 @@ class MyApp extends ConsumerWidget {
       darkTheme: ThemeData.dark(), // Dark theme
       themeMode: themeMode, // Use theme mode from provider
       routes: {
-        '/': (context) => splashscreen(),
+        '/': (context) => SplashScreen(),
       }, // Your home page
     );
   }

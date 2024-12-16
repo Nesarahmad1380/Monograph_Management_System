@@ -2,63 +2,63 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:monograph_management_system/Screens/userScreens/LoginPage.dart';
 
-class splashscreen extends StatefulWidget {
-  const splashscreen({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
   @override
-  State<splashscreen> createState() => _splashscreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _splashscreenState extends State<splashscreen>
+class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+
     Future.delayed(const Duration(seconds: 2), () {
-      Navigator.push(
+      Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => Loginpage()));
     });
   }
 
+  @override
   void dispose() {
-    super.dispose();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: SystemUiOverlay.values);
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Container(
-            width: double.infinity,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 50.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset('images/Heratacomputersciencelogo.PNG'),
-                  Text(
-                    'welcome to Mongraph Management System',
+    return Scaffold(
+      body: Center(
+        child: Container(
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 50.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset('images/Heratcomputersciencelogo.PNG'),
+                const Text(
+                  'Welcome to Monograph Management System',
+                  style: TextStyle(
+                    fontSize: 25,
+                    color: Colors.black,
+                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 2,
+                  ),
+                ),
+                const Text('v 0.0.1',
                     style: TextStyle(
                       fontSize: 25,
-                      color: Colors.black,
                       fontStyle: FontStyle.italic,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 2,
-                    ),
-                  ),
-                  Text('v 0.0.1',
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontStyle: FontStyle.italic,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 2,
-                      ))
-                ],
-              ),
+                    ))
+              ],
             ),
           ),
         ),
