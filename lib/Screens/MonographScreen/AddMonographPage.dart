@@ -1,86 +1,126 @@
 import 'package:flutter/material.dart';
 
 class AddMonographPage extends StatefulWidget {
-  const AddMonographPage({Key? key}) : super(key: key);
+  final Map<String, String>? monograph;
+  final bool isEditing;
+  final Function(Map<String, String>) onSave;
+
+  const AddMonographPage({
+    Key? key,
+    this.monograph,
+    this.isEditing = false,
+    required this.onSave,
+  }) : super(key: key);
 
   @override
   _AddMonographPageState createState() => _AddMonographPageState();
 }
 
 class _AddMonographPageState extends State<AddMonographPage> {
-  TextEditingController _titlecontrolar = TextEditingController();
-  TextEditingController _providercontrolar = TextEditingController();
-  TextEditingController _instructorcontrolar = TextEditingController();
-  TextEditingController _datecontrolar = TextEditingController();
-  TextEditingController _departmentcontrolar = TextEditingController();
-  TextEditingController _monographinformationcontrolar =
-      TextEditingController();
-  TextEditingController _facultycontrolar = TextEditingController();
+  late TextEditingController _titleController;
+  late TextEditingController _providerController;
+  late TextEditingController _instructorController;
+  late TextEditingController _dateController;
+  late TextEditingController _departmentController;
+  late TextEditingController _infoController;
+  late TextEditingController _facultyController;
+
+  @override
+  void initState() {
+    super.initState();
+    _titleController = TextEditingController(text: widget.monograph?['title']);
+    _providerController =
+        TextEditingController(text: widget.monograph?['provider']);
+    _instructorController =
+        TextEditingController(text: widget.monograph?['instructor']);
+    _dateController = TextEditingController(text: widget.monograph?['date']);
+    _departmentController =
+        TextEditingController(text: widget.monograph?['department']);
+    _infoController = TextEditingController(text: widget.monograph?['info']);
+    _facultyController =
+        TextEditingController(text: widget.monograph?['faculty']);
+  }
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _providerController.dispose();
+    _instructorController.dispose();
+    _dateController.dispose();
+    _departmentController.dispose();
+    _infoController.dispose();
+    _facultyController.dispose();
+    super.dispose();
+  }
+
+  void saveMonograph() {
+    final monograph = {
+      'title': _titleController.text,
+      'provider': _providerController.text,
+      'instructor': _instructorController.text,
+      'date': _dateController.text,
+      'department': _departmentController.text,
+      'info': _infoController.text,
+      'faculty': _facultyController.text,
+    };
+    widget.onSave(monograph);
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add monograph page'),
+        title: Text(widget.isEditing ? 'Edit Monograph' : 'Add Monograph'),
+        backgroundColor: Colors.blueAccent,
       ),
-      body: ListView(
-        children: [
-          TextField(
-            controller: _titlecontrolar,
-            decoration: InputDecoration(hintText: 'Enter the title'),
-          ),
-          SizedBox(
-            height: 3,
-          ),
-          TextField(
-            controller: _providercontrolar,
-            decoration: InputDecoration(hintText: 'Enter the Provider'),
-          ),
-          SizedBox(
-            height: 3,
-          ),
-          TextField(
-            controller: _instructorcontrolar,
-            decoration: InputDecoration(hintText: 'Enter the instructor'),
-          ),
-          SizedBox(
-            height: 3,
-          ),
-          TextField(
-            controller: _datecontrolar,
-            decoration: InputDecoration(hintText: 'Enter the Date'),
-          ),
-          SizedBox(
-            height: 3,
-          ),
-          TextField(
-            controller: _departmentcontrolar,
-            decoration: InputDecoration(hintText: 'Enter the Department'),
-          ),
-          SizedBox(
-            height: 3,
-          ),
-          TextField(
-            controller: _monographinformationcontrolar,
-            maxLines: 5,
-            decoration:
-                InputDecoration(hintText: 'Enter Monograph information'),
-          ),
-          SizedBox(
-            height: 3,
-          ),
-          TextField(
-            controller: _facultycontrolar,
-            decoration: InputDecoration(hintText: 'Enter the faculty'),
-          ),
-          SizedBox(
-            height: 3,
-          ),
-          ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text('Add '))
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ListView(
+          children: [
+            TextField(
+              controller: _titleController,
+              decoration: InputDecoration(labelText: 'Title'),
+            ),
+            SizedBox(height: 10),
+            TextField(
+              controller: _providerController,
+              decoration: InputDecoration(labelText: 'Provider'),
+            ),
+            SizedBox(height: 10),
+            TextField(
+              controller: _instructorController,
+              decoration: InputDecoration(labelText: 'Instructor'),
+            ),
+            SizedBox(height: 10),
+            TextField(
+              controller: _dateController,
+              decoration: InputDecoration(labelText: 'Date'),
+              keyboardType: TextInputType.datetime,
+            ),
+            SizedBox(height: 10),
+            TextField(
+              controller: _departmentController,
+              decoration: InputDecoration(labelText: 'Department'),
+            ),
+            SizedBox(height: 10),
+            TextField(
+              controller: _infoController,
+              maxLines: 5,
+              decoration: InputDecoration(labelText: 'Information'),
+            ),
+            SizedBox(height: 10),
+            TextField(
+              controller: _facultyController,
+              decoration: InputDecoration(labelText: 'Faculty'),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: saveMonograph,
+              child: Text(widget.isEditing ? 'Update' : 'Save'),
+            ),
+          ],
+        ),
       ),
     );
   }

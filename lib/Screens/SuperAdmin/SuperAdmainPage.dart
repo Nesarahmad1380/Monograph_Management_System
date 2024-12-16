@@ -91,7 +91,7 @@ class _SuperAdminPageState extends State<SuperAdminPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => Monographmanagemenpage()));
+                          builder: (context) => MonographManagementPage()));
                 },
               ),
             ),
