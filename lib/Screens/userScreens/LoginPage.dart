@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:monograph_management_system/Screens/MonographScreen/ViewMonographPage.dart';
+import 'package:monograph_management_system/Screens/SuperAdmin/SuperAdmainPage.dart';
 import 'package:monograph_management_system/Screens/userScreens/RagisterPage.dart';
 
 class LoginPage extends StatefulWidget {
@@ -16,6 +17,8 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
 
   void _validateFields() {
+    String username = _emailController.text;
+    String password = _passwordController.text;
     if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
       showDialog(
         context: context,
@@ -30,9 +33,27 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ),
       );
+    }
+    if (username == "nesarahmad" && password == "12345") {
+      // Navigate to Super Admin Page if credentials are correct
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => SuperAdminPage()),
+      );
     } else {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => ViewMonographPage()));
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Error'),
+          content: const Text('Enter correct username and password.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
     }
   }
 
@@ -78,8 +99,6 @@ class _LoginPageState extends State<LoginPage> {
                   keyboardType: TextInputType.emailAddress,
                 ),
                 const SizedBox(height: 15),
-                // Add this variable to toggle password visibility.
-
                 TextField(
                   controller: _passwordController,
                   decoration: InputDecoration(
@@ -104,8 +123,7 @@ class _LoginPageState extends State<LoginPage> {
                   obscureText:
                       !_isPasswordVisible, // Toggle password visibility.
                 ),
-
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: _validateFields,
                   style: ElevatedButton.styleFrom(

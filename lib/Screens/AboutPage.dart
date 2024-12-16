@@ -28,7 +28,7 @@ class _About_ScreenState extends ConsumerState<About_Screen> {
                     .transparent, // Optional: Set background color to transparent or any color
                 child: ClipOval(
                   child: Image.asset(
-                    'image/nsh1.jpg',
+                    'images/nsh1.jpg',
                     fit: BoxFit
                         .cover, // Ensures the image covers the circular area properly
                     width:
