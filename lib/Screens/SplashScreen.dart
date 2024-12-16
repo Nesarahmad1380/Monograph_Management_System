@@ -40,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen>
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('images/Heratcomputersciencelogo.PNG'),
+                Image.asset('images/Heratacomputersciencelogo.PNG'),
                 const Text(
                   'Welcome to Monograph Management System',
                   style: TextStyle(
