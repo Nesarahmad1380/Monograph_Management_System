@@ -120,7 +120,7 @@ class _ViewMonographPageState extends State<ViewMonographPage> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => About_Screen()),
+                  MaterialPageRoute(builder: (context) => AboutScreen()),
                 );
               },
             ),

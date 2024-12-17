@@ -2,83 +2,113 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:monograph_management_system/Providers/Fontsizeprovider.dart';
 
-class About_Screen extends ConsumerStatefulWidget {
-  const About_Screen({Key? key}) : super(key: key);
+class AboutScreen extends ConsumerStatefulWidget {
+  const AboutScreen({Key? key}) : super(key: key);
 
   @override
-  _About_ScreenState createState() => _About_ScreenState();
+  _AboutScreenState createState() => _AboutScreenState();
 }
 
-class _About_ScreenState extends ConsumerState<About_Screen> {
+class _AboutScreenState extends ConsumerState<AboutScreen> {
   @override
   Widget build(BuildContext context) {
-    double Fontsize = ref.watch(FontSizeProvider);
+    double fontSize = ref.watch(FontSizeProvider);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('About page'),
+        title: Text('About Us'),
+        centerTitle: true,
+        backgroundColor: Colors.blueAccent,
       ),
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.all(10),
-          child: ListView(
-            children: [
-              SizedBox(
-                height: 5,
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ListView(
+          children: [
+            SizedBox(height: 16),
+            _sectionHeader('Developer Information'),
+            _infoTile('Name', 'Nesarahmad "Morady"'),
+            _infoTile('Contact Number', '0790 457 286'),
+            _infoTile('Email', 'nasarahmedmo12345@gmail.com'),
+            SizedBox(height: 24),
+            _sectionHeader('About the Developer'),
+            Text(
+              '''This app was developed by Nesarahmad "Morady", a graduate of the Computer Science Faculty at Herat University. 
+During his internship at the WASSA organization, supported by UNHCR and other donors, he acquired expertise in Flutter development. 
+Special thanks to WASSA and UNHCR for their invaluable support.''',
+              textAlign: TextAlign.justify,
+              style: TextStyle(fontSize: fontSize, height: 1.5),
+            ),
+            SizedBox(height: 24),
+            _sectionHeader('About the Application'),
+            Text(
+              '''The Monograph Management System is designed for universities and can be customized for all faculties./n
+              it is the best way to give to new researcher a clue have finde the best reaserch title as all student run into problem 
+''',
+              textAlign: TextAlign.justify,
+              style: TextStyle(fontSize: fontSize, height: 1.5),
+            ),
+            SizedBox(height: 24),
+            _sectionHeader('Acknowledgments'),
+            Text(
+              '''This application is made possible thanks to the mentorship and support of the WASSA organization, UNHCR, and all contributors who helped make this project a reality. We extend our gratitude to everyone who played a part in this journey.''',
+              textAlign: TextAlign.justify,
+              style: TextStyle(fontSize: fontSize, height: 1.5),
+            ),
+            SizedBox(height: 32),
+            Center(
+              child: Text(
+                'Thank You for Using the Monograph Management System!',
+                style: TextStyle(
+                  fontSize: fontSize,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blueAccent,
+                ),
+                textAlign: TextAlign.center,
               ),
-              Center(
-                child: Text('Developer'),
-              ),
-              SizedBox(
-                height: 3,
-              ),
-              Center(
-                child: Text('Contect number : 0790 457 286'),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Center(
-                child: Text('Email: nasarahmedmo12345@gmail.com'),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Column(
-                crossAxisAlignment:
-                    CrossAxisAlignment.center, // Centers the texts
-                children: [
-                  Text(
-                    '''This app was developed by Nesarahmad "Morady", a graduate from 
-      the Computer Science Faculty of Herat University, who learned Flutter 
-      during an internship program at the WASSA organization, supported by 
-      UNHCR and other donors. Special thanks to them for their support.''',
-                    textAlign: TextAlign.justify, // Justifies the text
-                    style: TextStyle(fontSize: Fontsize),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Center(
-                    child: Text('Application'),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                      '''This is an Attendance Management System developed for universities 
-      and can be used in all faculties. It allows adding students not only 
-      by typing them manually but also by importing CSV files. The app 
-      provides a view page that shows a real attendance list, where absentees 
-      have a cross mark in their cell and attendees have a checkmark. It also 
-      counts the days students were absent or present and displays them in the 
-      last two columns.''',
-                      textAlign: TextAlign.justify, // Justifies the text
-                      style: TextStyle(fontSize: Fontsize)),
-                ],
-              )
-            ],
-          ),
+            ),
+          ],
         ),
+      ),
+    );
+  }
+
+  Widget _sectionHeader(String title) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Text(
+        title,
+        style: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color: Colors.black87,
+        ),
+      ),
+    );
+  }
+
+  Widget _infoTile(String label, String content) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            '$label:',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Flexible(
+            child: Text(
+              content,
+              style: TextStyle(
+                fontSize: 16,
+              ),
+              textAlign: TextAlign.end,
+            ),
+          ),
+        ],
       ),
     );
   }
