@@ -52,41 +52,124 @@ class _GeneralSettingScreenState extends ConsumerState<GeneralSettingScreen> {
     double fontSize = ref.watch(FontSizeProvider);
 
     return Scaffold(
-      appBar: AppBar(title: Text('General Settings')),
-      body: Padding(
+      appBar: AppBar(
+        title: Text('General Settings'),
+        centerTitle: true,
+        backgroundColor: Colors.blueAccent,
+      ),
+      body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SwitchListTile(
-              title: Text('Dark Mode'),
-              value: isDarkMode,
-              onChanged: (value) {
-                ref.read(ThemeProvider.notifier).toggleTheme();
-              },
-            ),
-            ListTile(
-              title: Text('Font Size'),
-              subtitle: Slider(
-                divisions: 5,
-                value: fontSize,
-                min: 12,
-                max: 34,
-                onChanged: (value) {
-                  _changeFontSize(value);
-                },
+            Text(
+              'Personalization',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.blueAccent,
               ),
             ),
-            ListTile(
-              title: Text('Language'),
-              subtitle: DropdownButton<String>(
-                value: language,
-                items: ['English', 'Spanish', 'French']
-                    .map((lang) => DropdownMenuItem(
-                          value: lang,
-                          child: Text(lang),
-                        ))
-                    .toList(),
-                onChanged: (value) => _changeLanguage(value!),
+            SizedBox(height: 10),
+            Card(
+              elevation: 4,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: SwitchListTile(
+                contentPadding: EdgeInsets.all(16.0),
+                title: Text(
+                  'Dark Mode',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+                subtitle: Text(
+                  isDarkMode ? 'Enabled' : 'Disabled',
+                  style: TextStyle(color: Colors.grey[600]),
+                ),
+                value: isDarkMode,
+                onChanged: (value) {
+                  ref.read(ThemeProvider.notifier).toggleTheme();
+                },
+                activeColor: Colors.blueAccent,
+              ),
+            ),
+            SizedBox(height: 16),
+            Card(
+              elevation: 4,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: ListTile(
+                contentPadding: EdgeInsets.all(16.0),
+                title: Text(
+                  'Font Size',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 10),
+                    Slider(
+                      divisions: 5,
+                      value: fontSize,
+                      min: 12,
+                      max: 34,
+                      onChanged: (value) {
+                        _changeFontSize(value);
+                      },
+                      activeColor: Colors.blueAccent,
+                      inactiveColor: Colors.grey[300],
+                    ),
+                    Text(
+                      'Selected: ${fontSize.toInt()}',
+                      style: TextStyle(color: Colors.grey[600]),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 16),
+            Card(
+              elevation: 4,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: ListTile(
+                contentPadding: EdgeInsets.all(16.0),
+                title: Text(
+                  'Language',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+                subtitle: DropdownButton<String>(
+                  value: language,
+                  isExpanded: true,
+                  underline: SizedBox(),
+                  items: ['English', 'Spanish', 'French']
+                      .map((lang) => DropdownMenuItem(
+                            value: lang,
+                            child: Text(lang),
+                          ))
+                      .toList(),
+                  onChanged: (value) => _changeLanguage(value!),
+                  style: TextStyle(color: Colors.black87),
+                ),
+              ),
+            ),
+            SizedBox(height: 24),
+            Center(
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(Icons.save),
+                label: Text('Save Settings'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blueAccent,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                ),
               ),
             ),
           ],

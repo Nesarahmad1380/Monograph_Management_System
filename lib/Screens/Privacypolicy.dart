@@ -8,9 +8,11 @@ class PrivacyPolicyPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Privacy Policy'),
+        centerTitle: true,
+        backgroundColor: Colors.blueAccent,
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -18,46 +20,87 @@ class PrivacyPolicyPage extends StatelessWidget {
               Text(
                 'Privacy Policy',
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 24,
                   fontWeight: FontWeight.bold,
+                  color: Colors.blueAccent,
                 ),
               ),
               SizedBox(height: 16),
-              Text(
-                'Introduction',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 8),
-              Text(
-                'This is where you write your app\'s privacy policy. Explain what data you collect, '
-                'how you use it, and how users can contact you with questions or concerns.',
-                style: TextStyle(fontSize: 16),
-              ),
+              Divider(),
               SizedBox(height: 16),
+              _sectionHeader('Introduction'),
               Text(
-                'Data Collection',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                'Welcome to the Monograph Management System! Your privacy is important to us. '
+                'This Privacy Policy explains how we collect, use, and protect your information when '
+                'you use our app. By using this app, you agree to the practices outlined in this policy.',
+                style: TextStyle(fontSize: 16, height: 1.5),
               ),
-              SizedBox(height: 8),
+              SizedBox(height: 24),
+              _sectionHeader('Data Collection'),
               Text(
-                'Provide details about the data you collect (e.g., user information, usage data) and '
-                'why you need it. If you do not collect data, state that explicitly.',
-                style: TextStyle(fontSize: 16),
+                'We may collect the following types of data:\n\n'
+                '- Personal information: such as your name, email address, or phone number, if provided.\n'
+                '- Usage data: including app preferences and settings to enhance user experience.\n\n'
+                'We collect this information to ensure the functionality of the app and to provide a '
+                'personalized experience. If we collect any sensitive information, it will be handled with the '
+                'utmost care and in compliance with applicable laws.',
+                style: TextStyle(fontSize: 16, height: 1.5),
               ),
-              SizedBox(height: 16),
+              SizedBox(height: 24),
+              _sectionHeader('Data Usage'),
               Text(
-                'Contact Us',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                'The data we collect is used to:\n\n'
+                '- Improve app functionality and user experience.\n'
+                '- Analyze usage trends to make informed updates.\n'
+                '- Communicate with users for support or updates, if necessary.\n\n'
+                'We do not sell or share your data with third parties without your explicit consent.',
+                style: TextStyle(fontSize: 16, height: 1.5),
               ),
-              SizedBox(height: 8),
+              SizedBox(height: 24),
+              _sectionHeader('Your Rights'),
               Text(
-                'If users have questions about your privacy policy, provide contact information here, '
-                'such as an email address.',
-                style: TextStyle(fontSize: 16),
+                'You have the right to:\n\n'
+                '- Access, modify, or delete your personal information stored in the app.\n'
+                '- Opt out of any data collection features.\n\n'
+                'If you wish to exercise these rights, please contact us at the provided email address below.',
+                style: TextStyle(fontSize: 16, height: 1.5),
+              ),
+              SizedBox(height: 24),
+              _sectionHeader('Contact Us'),
+              Text(
+                'If you have any questions or concerns about this Privacy Policy, feel free to reach out:\n\n'
+                'Email: nasarahmaedmo12345@gmail.com\n'
+                'Phone: +93 790 457 286\n'
+                'Phone: +93 78 17 14 886\n\n'
+                'We are here to address your concerns and ensure your privacy is respected.',
+                style: TextStyle(fontSize: 16, height: 1.5),
+              ),
+              SizedBox(height: 32),
+              Center(
+                child: Text(
+                  'Thank you for trusting Monograph Management System.',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blueAccent,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _sectionHeader(String title) {
+    return Text(
+      title,
+      style: TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+        color: Colors.black87,
       ),
     );
   }

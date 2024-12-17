@@ -22,21 +22,6 @@ class _About_ScreenState extends ConsumerState<About_Screen> {
           padding: EdgeInsets.all(10),
           child: ListView(
             children: [
-              CircleAvatar(
-                maxRadius: 100,
-                backgroundColor: Colors
-                    .transparent, // Optional: Set background color to transparent or any color
-                child: ClipOval(
-                  child: Image.asset(
-                    'images/nsh1.jpg',
-                    fit: BoxFit
-                        .cover, // Ensures the image covers the circular area properly
-                    width:
-                        200, // Adjust these values based on the image size and CircleAvatar radius
-                    height: 200,
-                  ),
-                ),
-              ),
               SizedBox(
                 height: 5,
               ),
