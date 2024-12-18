@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:monograph_management_system/Screens/userScreens/WaitingPage.dart';
@@ -10,15 +11,19 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final _auth = FirebaseAuth.instance;
   bool _isPasswordVisible = false;
-  final TextEditingController _nameController = TextEditingController();
+
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  void creatacout() {
+    String email = _emailController.text;
+    String password = _passwordController.text;
+    _auth.createUserWithEmailAndPassword(email: email, password: password);
+  }
 
   void _validateFields() {
-    if (_nameController.text.isEmpty ||
-        _emailController.text.isEmpty ||
-        _passwordController.text.isEmpty) {
+    if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -33,6 +38,7 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       );
     } else {
+      creatacout();
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => WaitingPage()));
     }
@@ -66,17 +72,6 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                   ],
-                ),
-                const SizedBox(height: 20),
-                TextField(
-                  controller: _nameController,
-                  decoration: InputDecoration(
-                    labelText: 'Name',
-                    prefixIcon: const Icon(Icons.person),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
                 ),
                 const SizedBox(height: 15),
                 TextField(
