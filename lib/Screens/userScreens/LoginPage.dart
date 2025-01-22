@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:monograph_management_system/Screens/MonographScreen/ViewMonographPage.dart';
@@ -6,14 +5,13 @@ import 'package:monograph_management_system/Screens/SuperAdmin/SuperAdmainPage.d
 import 'package:monograph_management_system/Screens/userScreens/RagisterPage.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final _auth = FirebaseAuth.instance;
   bool _isPasswordVisible = false;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -40,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
       // Navigate to Super Admin Page if credentials are correct
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => SuperAdminPage()),
+        MaterialPageRoute(builder: (context) => const SuperAdminPage()),
       );
     } else {
       showDialog(
@@ -125,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
                   obscureText:
                       !_isPasswordVisible, // Toggle password visibility.
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: _validateFields,
                   style: ElevatedButton.styleFrom(
@@ -151,7 +149,7 @@ class _LoginPageState extends State<LoginPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ViewMonographPage()));
+                            builder: (context) => const ViewMonographPage()));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blueAccent,
@@ -176,7 +174,7 @@ class _LoginPageState extends State<LoginPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => RegisterPage()));
+                            builder: (context) => const RegisterPage()));
                   },
                   child: Text(
                     'Go to Register Page',

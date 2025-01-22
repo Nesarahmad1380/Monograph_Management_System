@@ -2,7 +2,7 @@
     <application
         android:label="monograph_management_system"
         android:name="${applicationName}"
-        android:icon="@mipmap/heratcomputersciencelogo">
+        android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
             android:exported="true"

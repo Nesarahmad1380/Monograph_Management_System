@@ -5,6 +5,8 @@ import 'package:monograph_management_system/Providers/Theamprovider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class GeneralSettingScreen extends ConsumerStatefulWidget {
+  const GeneralSettingScreen({super.key});
+
   @override
   _GeneralSettingScreenState createState() => _GeneralSettingScreenState();
 }
@@ -53,16 +55,16 @@ class _GeneralSettingScreenState extends ConsumerState<GeneralSettingScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('General Settings'),
+        title: const Text('General Settings'),
         centerTitle: true,
         backgroundColor: Colors.blueAccent,
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Personalization',
               style: TextStyle(
                 fontSize: 18,
@@ -70,15 +72,15 @@ class _GeneralSettingScreenState extends ConsumerState<GeneralSettingScreen> {
                 color: Colors.blueAccent,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Card(
               elevation: 4,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
               child: SwitchListTile(
-                contentPadding: EdgeInsets.all(16.0),
-                title: Text(
+                contentPadding: const EdgeInsets.all(16.0),
+                title: const Text(
                   'Dark Mode',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                 ),
@@ -93,22 +95,22 @@ class _GeneralSettingScreenState extends ConsumerState<GeneralSettingScreen> {
                 activeColor: Colors.blueAccent,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Card(
               elevation: 4,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
               child: ListTile(
-                contentPadding: EdgeInsets.all(16.0),
-                title: Text(
+                contentPadding: const EdgeInsets.all(16.0),
+                title: const Text(
                   'Font Size',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                 ),
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Slider(
                       divisions: 5,
                       value: fontSize,
@@ -128,22 +130,22 @@ class _GeneralSettingScreenState extends ConsumerState<GeneralSettingScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Card(
               elevation: 4,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
               child: ListTile(
-                contentPadding: EdgeInsets.all(16.0),
-                title: Text(
+                contentPadding: const EdgeInsets.all(16.0),
+                title: const Text(
                   'Language',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                 ),
                 subtitle: DropdownButton<String>(
                   value: language,
                   isExpanded: true,
-                  underline: SizedBox(),
+                  underline: const SizedBox(),
                   items: ['English', 'Spanish', 'French']
                       .map((lang) => DropdownMenuItem(
                             value: lang,
@@ -151,24 +153,25 @@ class _GeneralSettingScreenState extends ConsumerState<GeneralSettingScreen> {
                           ))
                       .toList(),
                   onChanged: (value) => _changeLanguage(value!),
-                  style: TextStyle(color: Colors.black87),
+                  style: const TextStyle(color: Colors.black87),
                 ),
               ),
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             Center(
               child: ElevatedButton.icon(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: Icon(Icons.save),
-                label: Text('Save Settings'),
+                icon: const Icon(Icons.save),
+                label: const Text('Save Settings'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blueAccent,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                 ),
               ),
             ),

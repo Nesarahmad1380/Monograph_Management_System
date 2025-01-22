@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class WaitingPage extends StatefulWidget {
-  const WaitingPage({Key? key}) : super(key: key);
+  const WaitingPage({super.key});
 
   @override
   _WaitingPageState createState() => _WaitingPageState();
@@ -23,10 +23,8 @@ class _WaitingPageState extends State<WaitingPage> {
         backgroundColor: Colors.blueAccent,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 40.0),
+        child: ListView(
           children: [
             const Icon(
               Icons.hourglass_empty,
@@ -60,8 +58,8 @@ class _WaitingPageState extends State<WaitingPage> {
                 borderRadius: BorderRadius.circular(10.0),
                 border: Border.all(color: Colors.blueAccent, width: 1.5),
               ),
-              child: Column(
-                children: const [
+              child: const Column(
+                children: [
                   Text(
                     'Contact Number:',
                     style: TextStyle(

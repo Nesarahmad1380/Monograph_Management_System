@@ -1,29 +1,29 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:monograph_management_system/Screens/userScreens/WaitingPage.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+  const RegisterPage({super.key});
 
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final _auth = FirebaseAuth.instance;
   bool _isPasswordVisible = false;
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  void creatacout() {
-    String email = _emailController.text;
-    String password = _passwordController.text;
-    _auth.createUserWithEmailAndPassword(email: email, password: password);
-  }
 
   void _validateFields() {
-    if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
+    if (_emailController.text.isNotEmpty &&
+        _passwordController.text.isNotEmpty) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const WaitingPage()),
+      );
+    } else if (_emailController.text.isEmpty ||
+        _passwordController.text.isEmpty) {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -37,10 +37,6 @@ class _RegisterPageState extends State<RegisterPage> {
           ],
         ),
       );
-    } else {
-      creatacout();
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => WaitingPage()));
     }
   }
 

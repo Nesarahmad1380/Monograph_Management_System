@@ -3,7 +3,7 @@ import 'package:monograph_management_system/Screens/MonographScreen/AddMonograph
 import 'package:monograph_management_system/Screens/MonographScreen/MonographDetails.dart';
 
 class MonographManagementPage extends StatefulWidget {
-  const MonographManagementPage({Key? key}) : super(key: key);
+  const MonographManagementPage({super.key});
 
   @override
   _MonographManagementPageState createState() =>
@@ -56,7 +56,7 @@ class _MonographManagementPageState extends State<MonographManagementPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueAccent,
-        title: Text(
+        title: const Text(
           'Monograph Management',
           style: TextStyle(fontFamily: 'Roboto', fontWeight: FontWeight.bold),
         ),
@@ -67,16 +67,16 @@ class _MonographManagementPageState extends State<MonographManagementPage> {
           itemCount: monographs.length,
           itemBuilder: (context, index) {
             return Card(
-              margin: EdgeInsets.symmetric(vertical: 8.0),
+              margin: const EdgeInsets.symmetric(vertical: 8.0),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
               ),
               elevation: 5,
               child: ListTile(
-                contentPadding: EdgeInsets.all(16),
+                contentPadding: const EdgeInsets.all(16),
                 title: Text(
                   monographs[index]['title']!,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontFamily: 'Roboto',
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -93,7 +93,7 @@ class _MonographManagementPageState extends State<MonographManagementPage> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.edit,
                         color: Colors.blueAccent,
                       ),
@@ -118,7 +118,7 @@ class _MonographManagementPageState extends State<MonographManagementPage> {
                       },
                     ),
                     IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.delete,
                         color: Colors.redAccent,
                       ),
@@ -151,14 +151,14 @@ class _MonographManagementPageState extends State<MonographManagementPage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AddMonographPage()),
+            MaterialPageRoute(builder: (context) => const AddMonographPage()),
           ).then((newMonograph) {
             if (newMonograph != null) {
               _addOrUpdateMonograph(newMonograph);
             }
           });
         },
-        child: Icon(
+        child: const Icon(
           Icons.add,
           color: Colors.white,
         ),

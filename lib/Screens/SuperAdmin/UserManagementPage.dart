@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class USerManagementPage extends StatefulWidget {
-  const USerManagementPage({Key? key}) : super(key: key);
+  const USerManagementPage({super.key});
 
   @override
   _USerManagementPageState createState() => _USerManagementPageState();
@@ -34,7 +34,7 @@ class _USerManagementPageState extends State<USerManagementPage> {
             ? '${users[index]['name']} is now an Admin.'
             : '${users[index]['name']} is no longer an Admin.',
       ),
-      duration: Duration(seconds: 2),
+      duration: const Duration(seconds: 2),
     ));
   }
 
@@ -42,7 +42,7 @@ class _USerManagementPageState extends State<USerManagementPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('User Management'),
+        title: const Text('User Management'),
         backgroundColor: Colors.blueAccent,
         centerTitle: true,
       ),
@@ -65,34 +65,36 @@ class _USerManagementPageState extends State<USerManagementPage> {
               ),
               title: Text(
                 users[index]['name'],
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               subtitle: Text(users[index]['email']),
-              trailing: Icon(Icons.arrow_forward, color: Colors.blueAccent),
+              trailing:
+                  const Icon(Icons.arrow_forward, color: Colors.blueAccent),
               onTap: () {
                 showDialog(
                   context: context,
                   builder: (context) {
                     return AlertDialog(
-                      title: Text(
-                          '${users[index]['isAdmin'] ? "Remove Admin" : "Make Admin"}'),
+                      title: Text(users[index]['isAdmin']
+                          ? "Remove Admin"
+                          : "Make Admin"),
                       content: Text(
                           'Do you want to ${users[index]['isAdmin'] ? "remove admin access" : "grant admin access"} for ${users[index]['name']}?'),
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.pop(context),
-                          child: Text('Cancel'),
+                          child: const Text('Cancel'),
                         ),
                         ElevatedButton(
                           onPressed: () => toggleAdminStatus(index),
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blueAccent),
                           child: Text(users[index]['isAdmin']
                               ? 'Remove Admin'
                               : 'Make Admin'),
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.blueAccent),
                         ),
                       ],
                     );
@@ -108,16 +110,16 @@ class _USerManagementPageState extends State<USerManagementPage> {
 }
 
 class AddMonographPage extends StatelessWidget {
-  const AddMonographPage({Key? key}) : super(key: key);
+  const AddMonographPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Monograph'),
+        title: const Text('Add Monograph'),
         backgroundColor: Colors.blueAccent,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'This is the Add Monograph Page.',
           style: TextStyle(fontSize: 18),

@@ -8,7 +8,7 @@ import 'package:monograph_management_system/Screens/userScreens/LoginPage.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ViewMonographPage extends StatefulWidget {
-  const ViewMonographPage({Key? key}) : super(key: key);
+  const ViewMonographPage({super.key});
 
   @override
   _ViewMonographPageState createState() => _ViewMonographPageState();
@@ -58,14 +58,14 @@ class _ViewMonographPageState extends State<ViewMonographPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('View Monographs'),
+        title: const Text('View Monographs'),
       ),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   colors: [Colors.blueAccent, Colors.lightBlueAccent],
                   begin: Alignment.topLeft,
@@ -73,7 +73,7 @@ class _ViewMonographPageState extends State<ViewMonographPage> {
                 ),
               ),
               child: ListView(
-                children: [
+                children: const [
                   CircleAvatar(
                     radius: 35,
                     backgroundColor: Colors.white,
@@ -104,39 +104,40 @@ class _ViewMonographPageState extends State<ViewMonographPage> {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.settings, color: Colors.blueAccent),
-              title: Text('Settings'),
+              leading: const Icon(Icons.settings, color: Colors.blueAccent),
+              title: const Text('Settings'),
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => GeneralSettingScreen()),
+                      builder: (context) => const GeneralSettingScreen()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.info, color: Colors.blueAccent),
-              title: Text('About'),
+              leading: const Icon(Icons.info, color: Colors.blueAccent),
+              title: const Text('About'),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => AboutScreen()),
+                  MaterialPageRoute(builder: (context) => const AboutScreen()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.privacy_tip, color: Colors.blueAccent),
-              title: Text('Privacy Policy'),
+              leading: const Icon(Icons.privacy_tip, color: Colors.blueAccent),
+              title: const Text('Privacy Policy'),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => PrivacyPolicyPage()),
+                  MaterialPageRoute(
+                      builder: (context) => const PrivacyPolicyPage()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.share, color: Colors.blueAccent),
-              title: Text('Share'),
+              leading: const Icon(Icons.share, color: Colors.blueAccent),
+              title: const Text('Share'),
               onTap: () {
                 Share.share(
                   'Check out the Monograph Management System: https://github.com/Nesarahmad1380/Monograph_Management_System.git',
@@ -149,14 +150,14 @@ class _ViewMonographPageState extends State<ViewMonographPage> {
               color: Colors.grey[300],
             ),
             ListTile(
-              leading: Icon(Icons.logout, color: Colors.redAccent),
-              title: Text(
+              leading: const Icon(Icons.logout, color: Colors.redAccent),
+              title: const Text(
                 'Logout',
                 style: TextStyle(color: Colors.redAccent),
               ),
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => LoginPage()));
+                    MaterialPageRoute(builder: (context) => const LoginPage()));
               },
             ),
           ],
@@ -168,16 +169,16 @@ class _ViewMonographPageState extends State<ViewMonographPage> {
           itemCount: monographs.length,
           itemBuilder: (context, index) {
             return Card(
-              margin: EdgeInsets.symmetric(vertical: 8.0),
+              margin: const EdgeInsets.symmetric(vertical: 8.0),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
               ),
               elevation: 5,
               child: ListTile(
-                contentPadding: EdgeInsets.all(16),
+                contentPadding: const EdgeInsets.all(16),
                 title: Text(
                   monographs[index]['title']!,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontFamily: 'Roboto',
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
@@ -193,7 +194,7 @@ class _ViewMonographPageState extends State<ViewMonographPage> {
                         color: Colors.grey[600],
                       ),
                     ),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     Text(
                       'Date: ${monographs[index]['date']}',
                       style: TextStyle(
@@ -201,7 +202,7 @@ class _ViewMonographPageState extends State<ViewMonographPage> {
                         color: Colors.grey[600],
                       ),
                     ),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     Text(
                       'Department: ${monographs[index]['department']}',
                       style: TextStyle(
@@ -232,14 +233,14 @@ class _ViewMonographPageState extends State<ViewMonographPage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AddMonographPage()),
+            MaterialPageRoute(builder: (context) => const AddMonographPage()),
           ).then((newMonograph) {
             if (newMonograph != null) {
               _addOrUpdateMonograph(newMonograph);
             }
           });
         },
-        child: Icon(
+        child: const Icon(
           Icons.add,
           color: Colors.white,
         ),

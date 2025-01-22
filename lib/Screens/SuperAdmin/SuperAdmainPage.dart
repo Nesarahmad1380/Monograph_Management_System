@@ -3,7 +3,7 @@ import 'package:monograph_management_system/Screens/MonographScreen/MonographMan
 import 'package:monograph_management_system/Screens/SuperAdmin/UserManagementPage.dart';
 
 class SuperAdminPage extends StatefulWidget {
-  const SuperAdminPage({Key? key}) : super(key: key);
+  const SuperAdminPage({super.key});
 
   @override
   _SuperAdminPageState createState() => _SuperAdminPageState();
@@ -14,7 +14,7 @@ class _SuperAdminPageState extends State<SuperAdminPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Super Admin Dashboard',
           style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
@@ -27,8 +27,8 @@ class _SuperAdminPageState extends State<SuperAdminPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               'Welcome, Super Admin!',
               style: TextStyle(
                 fontSize: 20,
@@ -36,7 +36,7 @@ class _SuperAdminPageState extends State<SuperAdminPage> {
                 color: Colors.blueAccent,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               'Use the options below to manage users and monographs:',
               style: TextStyle(
@@ -45,58 +45,63 @@ class _SuperAdminPageState extends State<SuperAdminPage> {
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Card(
               elevation: 4,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
               child: ListTile(
-                leading: Icon(Icons.group, color: Colors.blueAccent, size: 30),
-                title: Text(
+                leading:
+                    const Icon(Icons.group, color: Colors.blueAccent, size: 30),
+                title: const Text(
                   'Manage Users',
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.black),
                 ),
-                subtitle: Text('Add, update, or remove users.'),
-                trailing: Icon(Icons.arrow_forward, color: Colors.blueAccent),
+                subtitle: const Text('Add, update, or remove users.'),
+                trailing:
+                    const Icon(Icons.arrow_forward, color: Colors.blueAccent),
                 onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => USerManagementPage()));
+                          builder: (context) => const USerManagementPage()));
                 },
               ),
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             Card(
               elevation: 4,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
               child: ListTile(
-                leading: Icon(Icons.book, color: Colors.blueAccent, size: 30),
-                title: Text(
+                leading:
+                    const Icon(Icons.book, color: Colors.blueAccent, size: 30),
+                title: const Text(
                   'Manage Monographs',
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.black),
                 ),
-                subtitle: Text('View or manage monograph records.'),
-                trailing: Icon(Icons.arrow_forward, color: Colors.blueAccent),
+                subtitle: const Text('View or manage monograph records.'),
+                trailing:
+                    const Icon(Icons.arrow_forward, color: Colors.blueAccent),
                 onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => MonographManagementPage()));
+                          builder: (context) =>
+                              const MonographManagementPage()));
                 },
               ),
             ),
-            Spacer(),
-            Text(
+            const Spacer(),
+            const Text(
               '© 2024 Monograph Management System',
               style: TextStyle(fontSize: 14, color: Colors.grey),
             ),

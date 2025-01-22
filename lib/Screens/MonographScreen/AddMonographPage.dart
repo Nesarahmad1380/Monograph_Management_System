@@ -6,21 +6,21 @@ class AddMonographPage extends StatefulWidget {
   final int? index;
 
   const AddMonographPage(
-      {Key? key, this.isEdit = false, this.monograph, this.index})
-      : super(key: key);
+      {super.key, this.isEdit = false, this.monograph, this.index});
 
   @override
   _AddMonographPageState createState() => _AddMonographPageState();
 }
 
 class _AddMonographPageState extends State<AddMonographPage> {
-  TextEditingController _titleController = TextEditingController();
-  TextEditingController _providerController = TextEditingController();
-  TextEditingController _instructorController = TextEditingController();
-  TextEditingController _dateController = TextEditingController();
-  TextEditingController _departmentController = TextEditingController();
-  TextEditingController _monographInfoController = TextEditingController();
-  TextEditingController _facultyController = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _providerController = TextEditingController();
+  final TextEditingController _instructorController = TextEditingController();
+  final TextEditingController _dateController = TextEditingController();
+  final TextEditingController _departmentController = TextEditingController();
+  final TextEditingController _monographInfoController =
+      TextEditingController();
+  final TextEditingController _facultyController = TextEditingController();
 
   @override
   void initState() {
@@ -57,7 +57,8 @@ class _AddMonographPageState extends State<AddMonographPage> {
       appBar: AppBar(
         title: Text(
           widget.isEdit ? 'Edit Monograph' : 'Add Monograph',
-          style: TextStyle(fontFamily: 'Roboto', fontWeight: FontWeight.bold),
+          style: const TextStyle(
+              fontFamily: 'Roboto', fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.blue, // Changed to blue accent
         elevation: 0,
@@ -101,16 +102,16 @@ class _AddMonographPageState extends State<AddMonographPage> {
               label: 'Faculty',
               icon: Icons.account_balance,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _saveMonograph,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue, // Changed to blue accent
-                padding: EdgeInsets.symmetric(vertical: 12),
+                padding: const EdgeInsets.symmetric(vertical: 12),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
-                textStyle: TextStyle(
+                textStyle: const TextStyle(
                   fontSize: 16,
                   fontFamily: 'Roboto',
                   fontWeight: FontWeight.bold,
@@ -118,8 +119,8 @@ class _AddMonographPageState extends State<AddMonographPage> {
               ),
               child: Text(
                 widget.isEdit ? 'Update Monograph' : 'Save Monograph',
-                style:
-                    TextStyle(color: Colors.white), // Button text is now white
+                style: const TextStyle(
+                    color: Colors.white), // Button text is now white
               ),
             ),
           ],
@@ -139,7 +140,7 @@ class _AddMonographPageState extends State<AddMonographPage> {
         controller: controller,
         decoration: InputDecoration(
           labelText: label,
-          labelStyle: TextStyle(fontFamily: 'Roboto', fontSize: 14),
+          labelStyle: const TextStyle(fontFamily: 'Roboto', fontSize: 14),
           prefixIcon: Icon(icon, color: Colors.blue), // Changed to blue accent
           filled: true,
           fillColor: Colors.grey[100],
@@ -149,7 +150,7 @@ class _AddMonographPageState extends State<AddMonographPage> {
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15.0),
-            borderSide: BorderSide(
+            borderSide: const BorderSide(
                 color: Colors.blue, width: 2), // Changed to blue accent
           ),
         ),
