@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:monograph_management_system/Screens/MonographScreen/ViewMonographPage.dart';
@@ -16,45 +17,68 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  void _validateFields() {
-    String username = _emailController.text;
-    String password = _passwordController.text;
+  // This method uses Firebase Authentication to sign in a user
+  Future<void> _loginUser() async {
+    // Validate that both email and password fields are not empty.
     if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Error'),
-          content: const Text('All fields are required.'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('OK'),
-            ),
-          ],
-        ),
-      );
+      _showErrorDialog('All fields are required.');
+      return;
     }
-    if (username == "nesarahmad" && password == "12345") {
-      // Navigate to Super Admin Page if credentials are correct
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const SuperAdminPage()),
-      );
-    } else {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Error'),
-          content: const Text('Enter correct username and password.'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('OK'),
-            ),
-          ],
-        ),
-      );
+
+    // Retrieve the input values
+    String email = _emailController.text.trim();
+    String password = _passwordController.text;
+
+    try {
+      // Attempt to sign in with email and password using Firebase Authentication
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+
+      // Example: You can use a custom condition to navigate to different pages
+      // For instance, if the email matches a super admin email, you can navigate to SuperAdminPage
+      if (email.toLowerCase() == "nesarahmad@example.com") {
+        // Replace the email condition as per your logic for Super Admin
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const SuperAdminPage()),
+        );
+      } else {
+        // Navigate to the main student page or any other page after login
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const ViewMonographPage()),
+        );
+      }
+    } on FirebaseAuthException catch (e) {
+      String errorMessage = 'Login failed. Please try again.';
+      if (e.code == 'user-not-found') {
+        errorMessage = 'No user found for that email.';
+      } else if (e.code == 'wrong-password') {
+        errorMessage = 'Incorrect password provided.';
+      } else if (e.code == 'invalid-email') {
+        errorMessage = 'The email address is not valid.';
+      }
+      _showErrorDialog(errorMessage);
+    } catch (e) {
+      _showErrorDialog('An unexpected error occurred. Please try again later.');
     }
+  }
+
+  // Helper method to show error dialogs
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Error'),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -120,12 +144,11 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
-                  obscureText:
-                      !_isPasswordVisible, // Toggle password visibility.
+                  obscureText: !_isPasswordVisible,
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: _validateFields,
+                  onPressed: _loginUser,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blueAccent,
                     padding: const EdgeInsets.symmetric(
@@ -147,9 +170,10 @@ class _LoginPageState extends State<LoginPage> {
                 ElevatedButton(
                   onPressed: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ViewMonographPage()));
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ViewMonographPage()),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blueAccent,
@@ -172,9 +196,10 @@ class _LoginPageState extends State<LoginPage> {
                 TextButton(
                   onPressed: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const RegisterPage()));
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const RegisterPage()),
+                    );
                   },
                   child: Text(
                     'Go to Register Page',

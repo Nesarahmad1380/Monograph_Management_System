@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:monograph_management_system/Screens/AboutPage.dart';
 import 'package:monograph_management_system/Screens/MonographScreen/AddMonographPage.dart';
@@ -83,7 +84,7 @@ class _ViewMonographPageState extends State<ViewMonographPage> {
                       size: 40,
                     ),
                   ),
-                  SizedBox(height: 10), // Add spacing between avatar and text
+                  SizedBox(height: 10),
                   Text(
                     'Monograph Management',
                     style: TextStyle(
@@ -92,7 +93,7 @@ class _ViewMonographPageState extends State<ViewMonographPage> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 4), // Add small spacing for subtitle
+                  SizedBox(height: 4),
                   Text(
                     'Your academic tool',
                     style: TextStyle(
@@ -155,9 +156,16 @@ class _ViewMonographPageState extends State<ViewMonographPage> {
                 'Logout',
                 style: TextStyle(color: Colors.redAccent),
               ),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const LoginPage()));
+              onTap: () async {
+                // Sign out from Firebase
+                await FirebaseAuth.instance.signOut();
+
+                // Navigate to the login page and remove all previous routes
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                  (route) => false,
+                );
               },
             ),
           ],

@@ -1,3 +1,22 @@
+buildscript {
+    
+    ext.kotlin_version = '2.1.10' 
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        // Use a Gradle version compatible with your Kotlin version
+        classpath 'com.android.tools.build:gradle:8.0.2' // Adjust if necessary
+        
+        
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.10"
+    
+        // Google Services plugin for Firebase
+        classpath 'com.google.gms:google-services:4.3.15'
+    }
+}
+
 allprojects {
     repositories {
         google()
@@ -5,14 +24,18 @@ allprojects {
     }
 }
 
+// Configure build directories
 rootProject.buildDir = "../build"
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
+
+// Ensure evaluation order
 subprojects {
     project.evaluationDependsOn(":app")
 }
 
+// Task to clean build directory
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
